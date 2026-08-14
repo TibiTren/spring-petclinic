@@ -17,14 +17,22 @@ pipeline {
                 sh './mvnw package -DskipTests'
             }
         }
+        stage('Docker Build') {
+            steps {
+                echo "Construim imaginea Docker..."
+               
+                sh 'docker build -t spring-petclinic:latest .'
+            }
+        }
     }
+    
     post {
         always {
             junit 'target/surefire-reports/*.xml'
         }
         success {
             archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
-            echo "Artefactul a fost salvat cu succes!"
+            echo "Artefactul a fost salvat și imaginea Docker a fost creată cu succes!"
         }
     }
 }
