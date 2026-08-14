@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'muncitor-docker'
+    }
     
     stages {
         stage('Build') {
