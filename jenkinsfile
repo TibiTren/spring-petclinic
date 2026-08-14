@@ -1,4 +1,4 @@
-pipeline {
+pipeline { // test pentru trigger
     agent {
         label 'muncitor-docker'
     }
