@@ -1,0 +1,26 @@
+jenkins:
+  systemMessage: "Bine ai venit! Acest server Jenkins este configurat 100% prin cod (JCasC).\n"
+  slaveAgentPort: 50000
+  numExecutors: 0
+  
+  # Cream automat un utilizator admin (fără a mai trece prin ecranele de setup)
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "admin"
+          password: "admin"
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+
+  # Configurarea Agentului
+  nodes:
+    - permanent:
+        name: "muncitor-docker"
+        remoteFS: "/home/jenkins/agent"
+        labelString: "muncitor-docker"
+        mode: NORMAL
+        launcher:
+          jnlp:
+            webSocket: true
